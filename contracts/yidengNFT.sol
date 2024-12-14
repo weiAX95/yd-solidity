@@ -1,24 +1,20 @@
-// 这个ERC721合约包含了以下特点：
-// 基础功能
-  // 继承OpenZeppelin的ERC721实现
-  // 支持NFT铸造
-  // 有最大供应量限制（10,000个）
-  // 固定铸造价格（0.05 ETH）
-// 特色功能
-    // 自定义元数据存储
-    // 可设置基础URI
-    // 铸造事件
-    // 退款机制
-    // 批量转账
-    // 只有合约拥有者可以提取资金和修改基础URI
-// 额外方法
-  // mint(): 铸造新的NFT
-  // getTokenMetadata(): 获取特定Token的元数据
-  // setBaseURI(): 更新基础URI
-  // withdraw(): 提取合约资金
-  // totalSupply(): 获取已铸造的NFT数量
-  // batchTransfer(): 批量转账
-
+// 核心特性
+  // 不可转让的 ERC721 徽章
+  // 每个学生只能获得一个徽章
+  // 只有合约拥有者可以铸造徽章
+// 元数据字段
+  // 课程名称
+  // 完成日期
+  // 讲师名称
+  // 课程学习时长
+// 主要函数
+  // mintBadge(): 为学生铸造徽章
+  // getBadgeMetadata(): 查询徽章元数据
+  // hasStudentReceivedBadge(): 检查学生是否已获得徽章
+  // totalBadgesMinted(): 获取已铸造徽章总数
+// 特殊设计
+  // 重写 transferFrom 和 safeTransferFrom 方法，使 NFT 不可转让
+  // 通过 _hasReceivedBadge 映射确保每个地址只能获得一个徽章
 
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
