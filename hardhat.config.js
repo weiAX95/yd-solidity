@@ -19,4 +19,11 @@ module.exports = {
     outDir: __dirname + '/frontend/src/types', // 将生成的 TypeScript 类型文件存放在前端项目的 src/types 文件夹下
     target: 'ethers-v5', // 使用 Ethers.js v5 类型
   },
+  networks: {
+    // 本地开发网络
+    localhost: {
+      url: 'http://127.0.0.1:8545',
+    },
+    // 可以添加其他网络配置，如 goerli, sepolia 等
+  },
 };
