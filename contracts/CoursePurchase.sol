@@ -47,7 +47,7 @@ contract CourseMarket is Ownable, ReentrancyGuard, Pausable {
     event CourseUpdated(string indexed web2CourseId, string newName, uint256 newPrice);
 
     constructor(
-        address _yiDengToken
+        address payable _yiDengToken
     ) Ownable(msg.sender) ReentrancyGuard() Pausable() {
         require(_yiDengToken != address(0), "Invalid token address");
         yidengToken = YidengToken(_yiDengToken);
