@@ -19,7 +19,7 @@ async function main() {
   // await tx.wait();
 
   const DAOContract = await hre.ethers.getContractFactory('DAOContract');
-  const daoContract = await DAOContract.deploy(deployer.address, yidengTokenAddress);
+  const daoContract = await DAOContract.deploy(deployer.address, await yidengToken.getAddress());
 
   console.log('DAO Contract deployed to:', daoContract.address);
 
@@ -38,7 +38,7 @@ async function main() {
   await yidengNFT.waitForDeployment();
   console.log('YidengNFT deployed to:', await yidengNFT.getAddress());
 
-  return { yidengToken, yidengNFT };
+  return { yidengToken, daoContract, yidengNFT };
 }
 
 main().catch((error) => {
