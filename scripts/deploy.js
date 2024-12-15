@@ -1,4 +1,5 @@
-const hre = require('hardhat');
+const hre = require("hardhat");
+
 async function main() {
   const [deployer] = await hre.ethers.getSigners();
 
@@ -40,9 +41,7 @@ async function main() {
   return { yidengToken, yidengNFT };
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch(error => {
-    console.error(error);
-    process.exit(1);
-  });
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
