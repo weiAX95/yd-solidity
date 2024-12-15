@@ -39,11 +39,13 @@ contract CourseLearningReward is Ownable {
         uint256 rewardAmount
     );
 
+    // 修改构造函数，传入初始所有者
     constructor(
+        address _initialOwner,
         address _rewardTokenAddress,
         uint256 _baseRewardPerSecond,
         uint256 _summaryQualityMultiplier
-    ) {
+    ) Ownable(_initialOwner) {
         rewardToken = IERC20(_rewardTokenAddress);
         baseRewardPerSecond = _baseRewardPerSecond;
         summaryQualityMultiplier = _summaryQualityMultiplier;

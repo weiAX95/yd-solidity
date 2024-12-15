@@ -20,13 +20,23 @@ async function main() {
   // 获取合约工厂
   const YidengNFT = await hre.ethers.getContractFactory("YidengNFT");
   // 部署合约
-  const YidengNFT = await YidengNFT.deploy(await yidengToken.getAddress());
+  const yidengNFT = await YidengNFT.deploy(await yidengToken.getAddress());
   await daoContract.waitForDeployment();
   // 等待合约部署完成
   await YidengNFT.deployed();
   console.log("YidengNFT deployed to:", YidengNFT.address);
 
-  return { yidengToken, daoContract, YidengNFT };
+  // 部署学习挖矿DAO合约
+  const CourseLearningReward = await hre.ethers.getContractFactory("CourseLearningReward");
+  const courseLearningReward = await CourseLearningReward.deploy(
+    yidengToken.target,     // 奖励代币地址
+    ethers.parseUnits("0.01", 18),  // 每秒0.001个代币
+    5                        // 质量系数
+  );
+  await courseLearningReward.waitForDeployment();
+  console.log("CourseLearningReward deployed to:", courseLearningReward.target);
+
+  return { yidengToken, daoContract, yidengNFT, courseLearningReward };
 }
 
 main().catch((error) => {
