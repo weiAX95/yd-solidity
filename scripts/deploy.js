@@ -1,42 +1,36 @@
-const { ethers } = require('hardhat');
-
+const hre = require('hardhat');
 async function main() {
   // 部署 YidengToken
-  const YidengToken = await hre.ethers.getContractFactory("YidengToken");
-  const initialSupply = 1000000; // 100万初始供应量
-  const yidengToken = await YidengToken.deploy(initialSupply);
+  const YidengToken = await hre.ethers.getContractFactory('YidengToken');
+  const yidengToken = await YidengToken.deploy(); // No need to pass initialSupply here
   await yidengToken.waitForDeployment();
 
-  console.log("YidengToken deployed to:", await yidengToken.getAddress());
+  console.log('YidengToken deployed to:', await yidengToken.getAddress());
 
-  // 部署 DAOContract
-  const DAOContract = await hre.ethers.getContractFactory("DAOContract");
-  const daoContract = await DAOContract.deploy(await yidengToken.getAddress());
-  await daoContract.waitForDeployment();
+  // 初始化代币分配 (调用 initialize 函数)
+  // const teamWallet = '0xTeamWalletAddress'; // Replace with actual address
+  // const marketingWallet = '0xMarketingWalletAddress'; // Replace with actual address
+  // const communityWallet = '0xCommunityWalletAddress'; // Replace with actual address
 
-  console.log("DAOContract deployed to:", await daoContract.getAddress());
+  // const tx = await yidengToken.initialize(teamWallet, marketingWallet, communityWallet);
+  // await tx.wait();
 
-  // 部署YiDengNFT
-  // 获取合约工厂
-  const YidengNFT = await hre.ethers.getContractFactory("YidengNFT");
-  // 部署合约
+  console.log('YidengToken initialized with token distribution');
+
+  // // 部署 DAOContract
+  // const DAOContract = await hre.ethers.getContractFactory('DAOContract');
+  // const daoContract = await DAOContract.deploy(await yidengToken.getAddress()); // Pass token address
+  // await daoContract.waitForDeployment();
+
+  // console.log('DAOContract deployed to:', await daoContract.getAddress());
+
+  // 部署 YiDengNFT
+  const YidengNFT = await hre.ethers.getContractFactory('YidengNFT');
   const yidengNFT = await YidengNFT.deploy();
   await yidengNFT.waitForDeployment();
-  // 等待合约部署完成
-  // await YidengNFT.deployed();
-  console.log("YidengNFT deployed to:", await yidengNFT.getAddress());
+  console.log('YidengNFT deployed to:', await yidengNFT.getAddress());
 
-  // 部署学习挖矿DAO合约
-  // const CourseLearningReward = await hre.ethers.getContractFactory("CourseLearningReward");
-  // const courseLearningReward = await CourseLearningReward.deploy(
-  //   yidengToken.target,     // 奖励代币地址
-  //   ethers.parseUnits("0.01", 18),  // 每秒0.001个代币
-  //   5                        // 质量系数
-  // );
-  // await courseLearningReward.waitForDeployment();
-  // console.log("CourseLearningReward deployed to:", courseLearningReward.target);
-
-  return { yidengToken, daoContract, yidengNFT };
+  return { yidengToken, yidengNFT };
 }
 
 main()
