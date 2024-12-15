@@ -1,4 +1,4 @@
-const hre = require("hardhat");
+const hre = require('hardhat');
 
 async function main() {
   const [deployer] = await hre.ethers.getSigners();
@@ -18,10 +18,10 @@ async function main() {
   // const tx = await yidengToken.initialize(teamWallet, marketingWallet, communityWallet);
   // await tx.wait();
 
-  const DAOContract = await hre.ethers.getContractFactory('DAOContract');
-  const daoContract = await DAOContract.deploy(deployer.address, yidengTokenAddress);
+  // const DAOContract = await hre.ethers.getContractFactory('DAOContract');
+  // const daoContract = await DAOContract.deploy(deployer.address, await yidengToken.getAddress);
 
-  console.log('DAO Contract deployed to:', daoContract.address);
+  // console.log('DAO Contract deployed to:', daoContract.address);
 
   console.log('YidengToken initialized with token distribution');
 
@@ -41,7 +41,7 @@ async function main() {
   return { yidengToken, yidengNFT };
 }
 
-main().catch((error) => {
+main().catch(error => {
   console.error(error);
   process.exitCode = 1;
 });
