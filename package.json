@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "gas": "REPORT_GAS=true npx hardhat test",
+    "abi": "npx hardhat export-abi",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,14 +20,24 @@
     "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "@nomicfoundation/hardhat-verify": "^2.0.0",
-    "@openzeppelin/contracts": "^5.1.0",
+    "@typechain/ethers-v5": "^11.1.2",
     "@typechain/ethers-v6": "^0.5.0",
-    "@typechain/hardhat": "^9.0.0",
-    "chai": "^4.2.0",
-    "ethers": "^6.4.0",
+    "@typechain/hardhat": "^9.1.0",
+    "@types/chai": "^5.0.1",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.10.2",
+    "chai": "^4.5.0",
+    "ethers": "^6.13.4",
     "hardhat": "^2.22.17",
+    "hardhat-abi-exporter": "^2.10.1",
     "hardhat-gas-reporter": "^1.0.8",
     "solidity-coverage": "^0.8.0",
-    "typechain": "^8.3.0"
+    "typechain": "^8.3.2"
+  },
+  "dependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@openzeppelin/contracts": "^5.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
   }
 }

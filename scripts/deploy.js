@@ -1,4 +1,4 @@
-const hre = require("hardhat");
+const { ethers } = require('hardhat');
 
 async function main() {
   // 部署 YidengToken
@@ -20,16 +20,28 @@ async function main() {
   // 获取合约工厂
   const YidengNFT = await hre.ethers.getContractFactory("YidengNFT");
   // 部署合约
-  const YidengNFT = await YidengNFT.deploy(await yidengToken.getAddress());
-  await daoContract.waitForDeployment();
+  const yidengNFT = await YidengNFT.deploy();
+  await yidengNFT.waitForDeployment();
   // 等待合约部署完成
-  await YidengNFT.deployed();
-  console.log("YidengNFT deployed to:", YidengNFT.address);
+  // await YidengNFT.deployed();
+  console.log("YidengNFT deployed to:", await yidengNFT.getAddress());
 
-  return { yidengToken, daoContract, YidengNFT };
+  // 部署学习挖矿DAO合约
+  // const CourseLearningReward = await hre.ethers.getContractFactory("CourseLearningReward");
+  // const courseLearningReward = await CourseLearningReward.deploy(
+  //   yidengToken.target,     // 奖励代币地址
+  //   ethers.parseUnits("0.01", 18),  // 每秒0.001个代币
+  //   5                        // 质量系数
+  // );
+  // await courseLearningReward.waitForDeployment();
+  // console.log("CourseLearningReward deployed to:", courseLearningReward.target);
+
+  return { yidengToken, daoContract, yidengNFT };
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main()
+  .then(() => process.exit(0))
+  .catch(error => {
+    console.error(error);
+    process.exit(1);
+  });
