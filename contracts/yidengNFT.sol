@@ -35,7 +35,6 @@ contract YidengNFT is ERC721, Ownable {
         _tokenIds++;
         return _tokenIds;
     }
-  }
 
     // 定义学习徽章的元数据结构
     // 包含课程详细信息
@@ -45,7 +44,6 @@ contract YidengNFT is ERC721, Ownable {
         string instructor; // 授课讲师
         uint256 duration; // 课程学习时长（小时）
     }
-  }
 
     // 存储每个 Token ID 对应的元数据
     // 将 Token ID 映射到具体的徽章元数据
