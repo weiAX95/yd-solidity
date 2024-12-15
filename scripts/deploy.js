@@ -1,5 +1,7 @@
 const hre = require('hardhat');
 async function main() {
+  const [deployer] = await hre.ethers.getSigners();
+
   // 部署 YidengToken
   const YidengToken = await hre.ethers.getContractFactory('YidengToken');
   const yidengToken = await YidengToken.deploy(); // No need to pass initialSupply here
@@ -14,6 +16,11 @@ async function main() {
 
   // const tx = await yidengToken.initialize(teamWallet, marketingWallet, communityWallet);
   // await tx.wait();
+
+  const DAOContract = await hre.ethers.getContractFactory('DAOContract');
+  const daoContract = await DAOContract.deploy(deployer.address, yidengTokenAddress);
+
+  console.log('DAO Contract deployed to:', daoContract.address);
 
   console.log('YidengToken initialized with token distribution');
 
