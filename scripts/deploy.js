@@ -1,4 +1,4 @@
-const hre = require("hardhat");
+const { ethers } = require('hardhat');
 
 async function main() {
   // 部署 YidengToken
@@ -39,7 +39,9 @@ async function main() {
   return { yidengToken, daoContract, yidengNFT };
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main()
+  .then(() => process.exit(0))
+  .catch(error => {
+    console.error(error);
+    process.exit(1);
+  });
